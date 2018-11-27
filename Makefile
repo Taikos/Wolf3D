@@ -19,12 +19,13 @@ OKC=\033[32m
 KOC=\033[31m
 
 FLAG = -Wall -Wextra -Werror
-FRAM = -lmlx -framework OpenGL -framework AppKit
+FRAM = -framework OpenGL -framework AppKit
 
 OBJ_PATH = ./obj/
 LFT_PATH = ./libft/
 INC_PATH = ./include/
 SRC_PATH = ./src/
+MLX_PATH = ./minilibx_macos/
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_NAME = wolf3d.h
@@ -39,7 +40,8 @@ all: $(NAME)
 $(NAME): $(OBJ)
 		@echo
 		@make -C $(LFT_PATH)
-		@gcc -o $(NAME) $(FRAM) $(FLAG) -L $(LFT_PATH) -lft $^ -o $@
+		@make -C $(MLX_PATH)
+		@gcc -o $(NAME) $(FRAM) $(FLAG) -L $(LFT_PATH) minilibx_macos/libmlx.a -lft $^ -o $@
 		@echo "$(OKC)$(NAME) CREATED & READY$(END)"
 		@echo "		            ZZZZZZZZZZZZZZZZZZZZZ\n		          ZZZZZ              ZZZZZZ\n		        ZZZZZ                    ZZZZ\n		      ZZZZZ                       ZZZZZ\n		    ZZZZZ                           ZZZZ\n		   ZZZZ                              ZZZZ\n		  ZZZ                                  ZZZ\n		 ZZZ                                    ZZZ\n		ZZZZ                                    ZZZ\n		ZZZ                                     ZZZ\n		ZZZ                                     ZZZ\n		ZZZ                                     ZZZ\n		ZZZ                             ZZ      ZZZ\n		ZZZ                           ZZZZZ     ZZZ\n		ZZZ                        ZZZZZZZZZ  ZZZZZ\n		ZZZZ    ZZZ              ZZZZZZZZZZZZ ZZZZ\n		ZZZZ   ZZZZZZ           ZZZZZZZZZZZZZ ZZZ\n		ZZZZ  ZZZZZZZZZZ       ZZZZZZZZZZZZZ  ZZ\n		ZZZZ  ZZZZZZZZZZZ      ZZZZZZZZZZZZ   ZZ\n		 ZZZ   ZZZZZZZZZZZ      ZZZZZZZZZZ    ZZ\n		 ZZZ    ZZZZZZZZZ ZZZZZ   ZZZZZZ    ZZZZ\n		  ZZZ    ZZZZZZZ  ZZZZZZ           ZZZZ\n		   ZZZZZ          Z  ZZZ     ZZZZZZZZZ\n		    ZZZZZZZZ          ZZ    ZZZZZZZZ\n		     ZZZZZZZZ             ZZZZZ\n		          ZZZ  Z   Z   Z  ZZZ\n		          ZZZ ZZZ ZZZ ZZZ ZZZ\n		          ZZZ ZZZ ZZZ ZZZ ZZZ\n		          ZZZ ZZZ ZZZ ZZZ ZZZ\n		           ZZZZZZZZZZZZZZZZZ\n		              ZZZZZZZZZZZ"Œ
 		@afplay bonus/coq.mp3
@@ -51,6 +53,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 
 clean:
 		@make -C $(LFT_PATH) clean
+		@make -C $(MLX_PATH) clean
 		@rm -rf $(OBJ_PATH)
 		@echo "$(KOC)$(NAME)'s OBJS REMOVED$(END)"
 

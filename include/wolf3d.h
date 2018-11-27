@@ -23,7 +23,7 @@
 # define SQUAT 256
 
 # include "../libft/libft.h"
-# include "mlx.h"
+# include "../minilibx_macos/mlx.h"
 # include <math.h>
 
 typedef struct	s_param
